@@ -41,7 +41,9 @@ def add_file(execution_id, uid, file):
     try:
         # res = requests_v2().get("http://speedtest.tele2.net/10MB.zip", timeout=20)
         # res = requests_v2().get("https://speed.hetzner.de/1GB.bin", timeout=5)
-        res = requests_v2().request_timeout("POST", "http://" + host + ":" + str(port) + "/api/executions/" + execution_id + "/details/" + uid + "/file/", files=files, timeout=20)
+        # res = requests_v2().request_timeout("POST", "http://" + host + ":" + str(port) + "/api/executions/" + execution_id + "/details/" + uid + "/file/", files=files, timeout=20)
+        res = requests.request_timeout("POST", "http://" + host + ":" + str(
+            port) + "/api/executions/" + execution_id + "/details/" + uid + "/file/", files=files, timeout=20)
         # print("finished add_file")
         if res is not None:
             if res.status_code != 200:

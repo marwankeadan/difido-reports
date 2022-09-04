@@ -1,6 +1,7 @@
-from Utils.Singleton import Singleton
+from Infra.Utils.Singleton import Singleton
 import difido
 from test_details import ReportElement, ReportElementStatus, ReportElementType
+# from test_details import ReportElement, ReportElementStatus, ReportElementType
 from time import localtime, strftime, time
 from configuration import Conf
 import threading
