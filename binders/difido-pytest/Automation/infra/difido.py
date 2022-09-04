@@ -3,16 +3,15 @@ Created on Aug 10, 2017
 
 @author: Itai Agmon
 '''
-
-from execution import Execution, Machine, Scenario, Test
-from test_details import ReportElement, TestDetails, ReportElementStatus, ReportElementType
-from execution_details import ExecutionDetails
+from . import local_utils, remote_utils
+from .execution import Execution, Machine, Scenario, Test
+from .test_details import ReportElement, TestDetails, ReportElementStatus, ReportElementType
+from .execution_details import ExecutionDetails
 from random import randint
 import time
 import socket
-import local_utils, remote_utils
 from datetime import datetime
-from configuration import Conf
+from .configuration import Conf
 import os
 import logging
 

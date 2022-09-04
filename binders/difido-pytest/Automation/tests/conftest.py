@@ -1,13 +1,13 @@
-from difido.configuration import Conf
-from difido.test_details import ReportElementStatus, ReportElementType
+from infra.reporter import Reporter
+from infra.test_details import ReportElementStatus, ReportElementType
 from time import localtime, strftime
 import time
-import difido.Reporter as Difido
+from infra.configuration import Conf
 
 difido_suite_name = None  # type: str
 difido_test_name = None  # type: str
 testAttr = {}
-reporter = Difido.Reporter()
+reporter = Reporter()
 config_file = "config.cfg"
 automation_ver = "Some version Here"
 
@@ -29,7 +29,7 @@ def pytest_runtest_logreport(report):
             testAttr['status'] = ReportElementStatus.SUCCESS
 
         time.sleep(1)
-        from difido.test_details import ReportElementType as Type
+        from infra.test_details import ReportElementType as Type
         reporter.report("", "Test End", Type.STEP)
         reporter.end_test(difido_test_name, testAttr)
 

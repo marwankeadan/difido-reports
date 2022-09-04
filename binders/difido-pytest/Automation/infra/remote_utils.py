@@ -5,7 +5,7 @@ Created on Aug 10, 2017
 '''
 
 import json
-from configuration import Conf
+from .configuration import Conf
 from http import client
 import requests
 

@@ -1,6 +1,7 @@
-from Test import Test
-from difido.test_details import ReportElementStatus
 import time
+
+from infra import ReportElementStatus
+from tests.test_case import Test
 
 
 class TestReporter(Test):

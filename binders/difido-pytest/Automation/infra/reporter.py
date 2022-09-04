@@ -1,9 +1,10 @@
-from Infra.Utils.Singleton import Singleton
-import difido
-from test_details import ReportElement, ReportElementStatus, ReportElementType
+# import RemoteReport, Console
+from infra.utils.Singleton import Singleton
+import infra
+from infra.test_details import ReportElement, ReportElementStatus, ReportElementType
 # from test_details import ReportElement, ReportElementStatus, ReportElementType
 from time import localtime, strftime, time
-from configuration import Conf
+from infra.configuration import Conf
 import threading
 import logging
 
@@ -24,10 +25,12 @@ class Reporter(object, metaclass=Singleton):
         remote_enable = conf.get_string("enable")
         if remote_enable.lower() == "true":
             print("Enable remote Reporter")
-            self.reporters.append(difido.RemoteReport())
+            from infra.difido import RemoteReport
+            self.reporters.append(RemoteReport())
         else:
             print("remote reporter disabled")
-        self.reporters.append(difido.Console())
+        from infra.difido import Console
+        self.reporters.append(Console())
 
     def log(self, msg, status=ReportElementStatus.SUCCESS):
         self.report("", msg, status=status)
