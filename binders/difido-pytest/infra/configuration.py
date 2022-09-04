@@ -9,31 +9,34 @@ import sys
 from shutil import copyfile
 from configparser import NoOptionError
 
+from definitions import root_dir
 
-class Conf(object):
-    
-    CONFIG_FILE = "config.cfg"
-    
+CONF_FILE_NAME = "difido.cfg"
+
+
+class Conf:
+
     def __init__(self, section):
+        self.config_file = os.path.join(root_dir, CONF_FILE_NAME)
 
         if "--config-file" in sys.argv:
-            Conf.CONFIG_FILE = sys.argv[sys.argv.index("--config-file")+1]
-        if not os.path.isfile(os.getcwd() + "/" + Conf.CONFIG_FILE):
+            self.config_file = sys.argv[sys.argv.index("--config-file") + 1]
+        if not os.path.isfile(self.config_file):
             self.create_config_file()
         self.section = section
         self.parser = configparser.ConfigParser()
-        self.parser.read(os.getcwd() + "/" + Conf.CONFIG_FILE)
-    
+        self.parser.read(self.config_file)
+
     def create_config_file(self):
-        template = os.path.dirname(sys.modules[__name__].__file__) + "/resources/" + Conf.CONFIG_FILE
-        copyfile(template, os.getcwd() + "/" + Conf.CONFIG_FILE)
-    
+        template = os.path.join(root_dir, "resources", CONF_FILE_NAME)
+        copyfile(template, self.config_file)
+
     def get_string(self, option):
         try:
             return self.parser.get(self.section, option).strip()
         except NoOptionError:
             return ""
-    
+
     def get_int(self, option):
         try:
             return self.parser.getint(self.section, option)
@@ -45,7 +48,7 @@ class Conf(object):
             return self.parser.getboolean(self.section, option)
         except NoOptionError:
             return 0.0
-    
+
     def get_list(self, option):
         try:
             return self.get_string(option).split(';')
@@ -57,7 +60,7 @@ class Conf(object):
         try:
             value = self.get_string(option)
         except NoOptionError:
-            return {} 
+            return {}
         if value is None:
             return d
         if len(value.split(";")) == 0:

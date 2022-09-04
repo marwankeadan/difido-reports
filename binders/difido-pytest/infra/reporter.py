@@ -1,8 +1,6 @@
-# import RemoteReport, Console
+from infra import LocalReport
 from infra.utils.singleton import Singleton
-import infra
 from infra.test_details import ReportElement, ReportElementStatus, ReportElementType
-# from test_details import ReportElement, ReportElementStatus, ReportElementType
 from time import localtime, strftime, time
 from infra.configuration import Conf
 import threading
@@ -22,6 +20,7 @@ class Reporter(object, metaclass=Singleton):
 
     def __init__(self):
         conf = Conf("remote")
+        self.reporters.append(LocalReport())
         remote_enable = conf.get_string("enable")
         if remote_enable.lower() == "true":
             print("Enable remote Reporter")

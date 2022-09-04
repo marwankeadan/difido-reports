@@ -1,3 +1,5 @@
+import pytest
+
 from infra.reporter import Reporter
 from infra.test_details import ReportElementStatus, ReportElementType
 from time import localtime, strftime
@@ -11,6 +13,12 @@ reporter = Reporter()
 config_file = "config.cfg"
 automation_ver = "Some version Here"
 
+
+@pytest.fixture(scope="session")
+def report():
+    return Reporter()
+
+
 def pytest_runtest_setup(item):
     global current_test_number
     global testAttr
@@ -18,6 +26,7 @@ def pytest_runtest_setup(item):
                 'className': item.nodeid.split("::")[1].replace("Test", "")}
     testname = item.name.replace("test_", "")
     reporter.start_test(testname, testAttr)
+
 
 def pytest_runtest_logreport(report):
     if report.when == 'call':
@@ -33,10 +42,11 @@ def pytest_runtest_logreport(report):
         reporter.report("", "Test End", Type.STEP)
         reporter.end_test(difido_test_name, testAttr)
 
+
 def pytest_sessionfinish(session):
-    reporter.debug("Clean up")
-    reporter.debug("Wait 10 seconds before execution End")
-    time.sleep(10)
+    # reporter.debug("Clean up")
+    # reporter.debug("Wait 10 seconds before execution End")
+    # time.sleep(10)
     reporter.end_suite(difido_suite_name, testAttr)
     reporter.close()
 
