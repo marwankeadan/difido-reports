@@ -4,7 +4,7 @@ Created on Aug 10, 2017
 @author: itai
 '''
 
-class ExecutionDetails(object):
+class ExecutionDetails:
     '''
     classdocs
     '''
@@ -20,10 +20,7 @@ class ExecutionDetails(object):
         self.force_new = False
         
     def dict(self):
-        d = {}
-        d['description'] = self.description
-        d['executionProperties'] = self.execution_properties
-        d['shared'] = self.shared
-        d['forceNew'] = self.force_new   
-        return d
-        
+        return {'description': self.description,
+             'executionProperties': self.execution_properties,
+             'shared': self.shared,
+             'forceNew': self.force_new}

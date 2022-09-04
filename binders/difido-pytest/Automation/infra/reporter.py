@@ -1,5 +1,5 @@
 # import RemoteReport, Console
-from infra.utils.Singleton import Singleton
+from infra.utils.singleton import Singleton
 import infra
 from infra.test_details import ReportElement, ReportElementStatus, ReportElementType
 # from test_details import ReportElement, ReportElementStatus, ReportElementType

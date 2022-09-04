@@ -30,7 +30,7 @@ class Conf(object):
     
     def get_string(self, option):
         try:
-            return self.parser.get(self.section, option)
+            return self.parser.get(self.section, option).strip()
         except NoOptionError:
             return ""
     

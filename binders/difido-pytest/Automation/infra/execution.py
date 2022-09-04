@@ -33,7 +33,7 @@ class Execution(object):
     
     
     
-class Node(object):
+class Node:
     
     def __init__(self, name, node_type):
         self.name = name;
@@ -45,12 +45,8 @@ class Node(object):
         self._parent = parent    
     
     def dict(self):
-        d = {}
-        d["name"] = self.name
-        d["status"] = self.status
-        d["type"] = self._node_type
-        return d
-    
+        return {"name": self.name, "status": self.status, "type": self._node_type}
+
     def set_status(self, status):
         if status != "error" and status != "failure" and status != "warning" and status != "success":
             raise ValueError("Illegal status %s" % status)
