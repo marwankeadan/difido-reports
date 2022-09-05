@@ -17,7 +17,7 @@ JAR_FILE = 'difido.jar'
 def prepare_template(log_folder):
     if os.path.isfile(os.path.join(log_folder, "template", "index.html")):
         return
-    archive = ZipFile(os.path.join(root_dir, "resources", JAR_FILE), 'r')
+    archive = ZipFile(os.path.join(root_dir, "difido", JAR_FILE), 'r')
     try:
         for zfile in archive.namelist():
             if zfile.startswith('il.co.topq.difido.view/'):

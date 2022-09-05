@@ -5,7 +5,6 @@ Created on Aug 10, 2017
 '''
 from abc import ABC
 
-from definitions import root_dir
 from . import local_utils, remote_utils, config
 from .execution import Execution, Machine, Scenario, Test
 from .test_details import ReportElement, TestDetails, ReportElementStatus, ReportElementType
@@ -162,7 +161,7 @@ class LocalReport(AbstractReport):
         super().__init__()
 
     def start(self):
-        self.log_folder = os.path.join(root_dir, "log")
+        self.log_folder = os.path.join(os.getcwd(), "log")
         local_utils.prepare_template(self.log_folder)
         local_utils.prepare_current_log_folder(self.log_folder)
 

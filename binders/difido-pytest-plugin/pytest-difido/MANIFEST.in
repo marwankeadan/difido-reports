@@ -3,4 +3,4 @@ include README.rst
 
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
-include resources/difido.jar
+include difido/difido.jar

@@ -24,6 +24,7 @@ setup(
     long_description=read('README.rst'),
     py_modules=['definitions'],
     python_requires='>=3.5',
+    include_package_data=True,
     install_requires=['pytest>=4.0.0', 'requests>=2.20.0', 'requests-toolbelt>=0.8.0'],
     packages= ["difido"],
     classifiers=[

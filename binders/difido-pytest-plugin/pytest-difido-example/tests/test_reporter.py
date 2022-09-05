@@ -1,5 +1,4 @@
-
-from infra import ReportElementStatus
+from difido import ReportElementStatus
 
 
 def test_pass(report):
