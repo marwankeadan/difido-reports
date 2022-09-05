@@ -64,7 +64,7 @@ class Reporter(object, metaclass=Singleton):
     def add_execution_properties(self, key, value):
         self.report_lock.acquire()
         for reporter in self.reporters:
-            reporter.add_exeution_property(key, value)
+            reporter.add_execution_property(key, value)
         self.report_lock.release()
 
     def add_test_property(self, key, value):

@@ -1,4 +1,3 @@
-import time
 
 from infra import ReportElementStatus
 
@@ -15,12 +14,10 @@ def test_fail(report):
 
 def test_warning(report):
     report.log("Log message", ReportElementStatus.WARNING)
-    time.sleep(12)
 
 
 def test_error(report):
     report.log("Log message", ReportElementStatus.ERROR)
-    time.sleep(61)
 
 
 def test_exception(report):
@@ -28,7 +25,6 @@ def test_exception(report):
 
 
 def test_assertion(report):
-    time.sleep(1)
     assert 1 == 0
 
 

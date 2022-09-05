@@ -3,6 +3,8 @@ Created on Aug 10, 2017
 
 @author: Itai Agmon
 '''
+from abc import ABC
+
 from definitions import root_dir
 from . import local_utils, remote_utils
 from .execution import Execution, Machine, Scenario, Test
@@ -17,7 +19,7 @@ import os
 import logging
 
 
-class AbstractReport:
+class AbstractReport(ABC):
     TIME_FORMAT = '%H:%M:%S:'
     DATE_FORMAT = '%Y/%m/%d'
     ROBOT_FORMAT = '%Y%m%d %H:%M:%S'
@@ -25,6 +27,14 @@ class AbstractReport:
     def __init__(self):
         self.general_conf = Conf("general")
         self.execution: Execution = None
+        self.uid: int = None
+        self.index = 0
+        self.scenario_stack = []
+        self.buffered_elements = []
+        self.testDetails = None
+        self.scenario: Scenario = None
+        self.test: Test = None
+        self.test_start_time: str = None
         self.init_model()
         self.start()
         self.num_of_suites_to_ignore = self.general_conf.get_int("num.of.suites.to.ignore")
@@ -36,10 +46,6 @@ class AbstractReport:
 
         self.execution.add_machine(machine)
         self.uid = str(randint(1000, 9999) + time.time() / 1000).replace(".", "")
-        self.index = 0
-        self.scenario_stack = []
-        self.buffered_elements = []
-        self.testDetails = None
 
     def start_suite(self, name, attr):
         self.execution.get_last_machine().planned_tests = 0
@@ -146,7 +152,7 @@ class AbstractReport:
         self.test.add_property(key, value)
         self.write_test_details()
 
-    def add_exeution_property(self, key, value):
+    def add_execution_property(self, key, value):
         pass
 
 
@@ -238,8 +244,8 @@ class RemoteReport(AbstractReport):
             print("Number of failed request exceeded the maximum allowed. Disabling remote Difido")
         pass
 
-    def add_exeution_property(self, key, value):
-        super(RemoteReport, self).add_exeution_property(key, value)
+    def add_execution_property(self, key, value):
+        super(RemoteReport, self).add_execution_property(key, value)
         self.execution_properties[key] = value
 
     def add_report_element(self, element):
